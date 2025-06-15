@@ -186,4 +186,10 @@ app.UseCors(x =>
 
 app.MapCarter();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<VacancyDbContext>();
+    db.Database.Migrate();
+}
+
 app.Run();
